@@ -116,7 +116,7 @@ from sentence_transformers import SentenceTransformer
 app = Flask(__name__)
 
 # 🔹 Step 1: Initialize Pinecone Client
-PINECONE_API_KEY = "pcsk_5ftJtk_RPGwskkYfaFGx21SBduyqwS44EGQ2stdCX3rJRdhB1s32dos2WfAJMH6hRDhq3B"  # Replace with your actual API Key
+# PINECONE_API_KEY = "pcsk_5ftJtk_RPGwskkYfaFGx21SBduyqwS44EGQ2stdCX3rJRdhB1s32dos2WfAJMH6hRDhq3B"  # Replace with your actual API Key
 pc = Pinecone(api_key=PINECONE_API_KEY)
 index_name = "medicalchatbot"
 index = pc.Index(index_name)
