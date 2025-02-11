@@ -13,23 +13,26 @@ $(document).ready(function() {
         var userMessage = $("#user-input").val().trim();
         if (!userMessage) return;  // Ignore empty messages
 
-        $("#chat-box").append("<p class='user'><b>You:</b> " + userMessage + "</p>");
+        var timeStamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+        $("#chat-box").append("<div class='message user-message'><p><b>You:</b> " + userMessage + "</p><span class='time'>" + timeStamp + "</span></div>");
         $("#user-input").val(""); // Clear input field
 
         $.post("/get", { msg: userMessage })
         .done(function(data) {
-            console.log("🔄 Received Data:", data);  // ✅ Debugging log
+            console.log("🔄 Response Data:", data);  
 
-            // ✅ Extract response from JSON object
             if (data && data.response) {
-                $("#chat-box").append("<p class='bot'><b>Bot:</b> " + data.response + "</p>");
+                $("#chat-box").append("<div class='message bot-message'><p><b>Bot:</b> " + data.response + "</p><span class='time'>" + timeStamp + "</span></div>");
             } else {
-                $("#chat-box").append("<p class='bot'><b>Bot:</b> ⚠ Error: No valid response received.</p>");
+                $("#chat-box").append("<div class='message bot-message'><p><b>Bot:</b> ⚠ No valid response.</p><span class='time'>" + timeStamp + "</span></div>");
             }
         })
         .fail(function(xhr, status, error) {
             console.log("❌ AJAX Error:", error);
-            $("#chat-box").append("<p class='bot'><b>Bot:</b> ❌ Error retrieving response.</p>");
+            $("#chat-box").append("<div class='message bot-message'><p><b>Bot:</b> ❌ Error retrieving response.</p><span class='time'>" + timeStamp + "</span></div>");
         });
+
+        $("#chat-box").scrollTop($("#chat-box")[0].scrollHeight); // Auto-scroll to the latest message
     }
 });
