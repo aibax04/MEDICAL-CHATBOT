@@ -154,7 +154,7 @@ def chat():
     if not query_result.get("matches", []):
         response_text = "❌ No relevant information found."
     else:
-        response_text = query_result["matches"][0]["metadata"].get("text", "⚠ No text found.")
+        response_text = query_result["matches"][0]["metadata"].get("text", "Sorry I don't have any access to external data , please clarify your question.")
 
     print(f"✅ Bot Response: {response_text}")  # Debugging log
 
