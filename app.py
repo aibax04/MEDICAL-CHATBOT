@@ -86,23 +86,6 @@ from langchain.embeddings import HuggingFaceEmbeddings
 # 🔹 Load the Sentence Transformer model for embeddings
 embedding_model = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
 
-# 🔹 Convert a sample text into an embedding vector
-# text = "How does the heart function?"
-# query_embedding = embedding_model.embed_query(text)
-
-
-# query_result = index.query(
-#     vector=query_embedding,
-#     top_k=5,  # More results
-#     include_metadata=True
-# )
-
-# print("\n🔍 Query Results:")
-# for match in query_result["matches"]:
-#     score = match["score"]
-#     text = match["metadata"].get("text", "⚠ No matching text found")
-#     print(f"🔹 Confidence Score: {score:.4f}")
-#     print(f"📄 Retrieved Text: {text}\n")
 
 
 
