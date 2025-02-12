@@ -1,11 +1,7 @@
-/* Import Google Font */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-
-/* General Page Styling */
+/* 🌟 General Styles */
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #000; /* Pure Black Background */
-    color: white;
+    background: linear-gradient(to right, #e0f7fa, #80d8ff);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,181 +9,164 @@ body {
     margin: 0;
 }
 
-/* Chat Container */
-#chat-container {
-    width: 40%;
-    height: 80vh;
-    background-color: #111; /* Dark Gray */
+/* 🌟 Chatbot Window */
+.chat-window {
+    width: 420px;
+    max-width: 90%;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    border: 2px solid #007bff;
     border-radius: 20px;
-    box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
-    overflow: hidden;
-    border: 2px solid white;
+    position: relative;
+    text-align: center;
 }
 
-/* Chat Header */
-#chat-header {
-    background: linear-gradient(45deg, #000, #222);
-    padding: 15px;
-    text-align: center;
-    font-size: 22px;
-    font-weight: bold;
+/* 🌟 Chat Header */
+.chat-header {
+    background: #007bff;
     color: white;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 15px 15px 0 0;
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 10px;
 }
 
-/* Chat Box */
-#chat-box {
-    flex: 1;
-    padding: 15px;
+.chat-header img {
+    width: 30px;
+    height: 30px;
+}
+
+/* 🌟 Chat Box with Scrollbar */
+.chat-box {
+    height: 350px;
     overflow-y: auto;
-    background: #000;
-    scrollbar-width: thin;
-    scrollbar-color: #fff #000;
+    padding: 10px;
     display: flex;
     flex-direction: column;
+    border-top: 2px solid #007bff;
+    border-bottom: 2px solid #007bff;
 }
 
-/* Custom Scrollbar */
-#chat-box::-webkit-scrollbar {
-    width: 8px;
+/* 🎚️ Custom Scrollbar */
+.chat-box::-webkit-scrollbar {
+    width: 6px;
 }
 
-#chat-box::-webkit-scrollbar-thumb {
-    background: #fff;
-    border-radius: 5px;
+.chat-box::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
 }
 
-/* Chat Messages */
+.chat-box::-webkit-scrollbar-thumb {
+    background: #007bff;
+    border-radius: 10px;
+}
+
+/* 🌟 Chat Bubbles */
 .message {
+    max-width: 75%;
+    padding: 12px;
+    margin: 10px;
+    border-radius: 12px;
+    position: relative;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* ✨ User Message */
+.user {
+    background: #007bff;
+    color: white;
+    align-self: flex-end;
+    border-top-right-radius: 0;
+}
+
+/* ✨ Bot Message */
+.bot {
+    background: white;
+    color: black;
+    align-self: flex-start;
+    border-top-left-radius: 0;
     display: flex;
     align-items: center;
-    margin: 10px;
-    flex-direction: column;
+    gap: 8px;
 }
 
-/* User Message */
-.user-message {
-    align-items: flex-end;
+/* 🩺 Doctor Avatar */
+.bot img {
+    width: 24px;
+    height: 24px;
 }
 
-/* Bot Message */
-.bot-message {
-    align-items: flex-start;
+/* 🕒 Timestamp */
+.timestamp {
+    font-size: 10px;
+    color: gray;
+    position: absolute;
+    bottom: -15px;
+    right: 5px;
 }
 
-/* Chat Bubbles */
-.message p {
-    max-width: 70%;
-    padding: 12px 16px;
-    border-radius: 18px;
-    font-size: 16px;
-    word-wrap: break-word;
-    line-height: 1.5;
-    border: 2px solid white;
-    transition: border 0.3s ease-in-out;
+/* 🌟 Input Box */
+.input-container {
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 10px;
+    border-radius: 50px;
+    margin-top: 10px;
     position: relative;
 }
 
-/* 🔥 User Message (White Bubble) */
-.user-message p {
-    background-color: #fff;
-    color: #000;
-    border-bottom-right-radius: 0;
-    text-align: right;
-    border: 2px solid white;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-}
-
-/* 🔥 Bot Message (Black Bubble with White Text) */
-.bot-message p {
-    background-color: #222;
-    color: white;
-    border-bottom-left-radius: 0;
-    text-align: left;
-    border: 2px solid white;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-}
-
-/* Time Display */
-.time {
-    font-size: 12px;
-    color: gray;
-    margin-top: 2px;
-    opacity: 0.8;
-}
-
-/* Input Section */
-#input-container {
-    display: flex;
-    padding: 15px;
-    background-color: #111;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-}
-
-/* 🔥 Input Field with White Border */
 #user-input {
     flex: 1;
-    padding: 12px;
-    font-size: 16px;
-    border: 2px solid white;
-    border-radius: 8px;
-    background-color: #000;
-    color: white;
-    outline: none;
-    transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-
-#user-input:focus {
-    border: 2px solid #fff;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
-}
-
-/* Send Button */
-#send-button {
-    padding: 12px 18px;
-    font-size: 16px;
-    background-color: #fff;
-    color: #000;
     border: none;
-    border-radius: 8px;
+    outline: none;
+    font-size: 16px;
+    padding: 8px;
+    border-radius: 20px;
+}
+
+/* ✨ Send Button */
+#send-button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
     cursor: pointer;
-    margin-left: 10px;
-    transition: background 0.3s ease-in-out, transform 0.2s;
-    font-weight: bold;
+    border-radius: 50%;
+    margin-left: 5px;
+    transition: 0.3s;
 }
 
 #send-button:hover {
-    background-color: #ccc;
-    transform: scale(1.05);
+    background: #0056b3;
 }
 
-#send-button:active {
-    transform: scale(0.95);
+/* ⏳ Typing Indicator */
+.typing {
+    font-style: italic;
+    color: gray;
+    font-size: 14px;
+    margin-left: 15px;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    #chat-container {
-        width: 90%;
-        height: 85vh;
+/* 🌟 Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
     }
-
-    #chat-box {
-        font-size: 14px;
-    }
-
-    #user-input {
-        font-size: 14px;
-    }
-
-    #send-button {
-        font-size: 14px;
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }

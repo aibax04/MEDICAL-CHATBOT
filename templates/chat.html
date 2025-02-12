@@ -3,20 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOC-AI</title>
+    <title>Medical Chatbot</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div id="chat-container">
-        <div id="chat-header">⚫ DOC-AI ⚪</div>
-        <div id="chat-box"></div>
-        <div id="input-container">
-            <input type="text" id="user-input" placeholder="Ask the doctor..." />
-            <button id="send-button">Send</button>
+
+    <!-- 🌟 Chat Window -->
+    <div class="chat-window">
+        
+        <!-- 🩺 Chat Header -->
+        <div class="chat-header">
+            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Doctor">
+            Medical Chatbot
         </div>
+
+        <!-- 💬 Chat Box -->
+        <div id="chat-box" class="chat-box"></div>
+
+        <!-- ⏳ Typing Indicator -->
+        <div class="typing" style="display: none;">Doctor is typing...</div>
+
+        <!-- ✏️ Input Field -->
+        <div class="input-container">
+            <input type="text" id="user-input" placeholder="Ask a question..." />
+            <button id="send-button">➤</button>
+        </div>
+
     </div>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
+
 </body>
 </html>

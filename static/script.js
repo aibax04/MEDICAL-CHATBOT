@@ -1,38 +1,48 @@
-$(document).ready(function() {
-    $("#send-button").click(function() {
+$(document).ready(function () {
+    $("#send-button").click(function () {
         sendMessage();
     });
 
-    $("#user-input").keypress(function(event) {
-        if (event.which == 13) { // Enter key
+    $("#user-input").keypress(function (event) {
+        if (event.which === 13) {
             sendMessage();
         }
     });
 
     function sendMessage() {
-        var userMessage = $("#user-input").val().trim();
-        if (!userMessage) return;  // Ignore empty messages
+        let userMessage = $("#user-input").val();
+        if (userMessage.trim() === "") return;
 
-        var timeStamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        let timestamp = new Date().toLocaleTimeString();
 
-        $("#chat-box").append("<div class='message user-message'><p><b>You:</b> " + userMessage + "</p><span class='time'>" + timeStamp + "</span></div>");
-        $("#user-input").val(""); // Clear input field
+        $("#chat-box").append(
+            `<div class='message user'>${userMessage} <span class="timestamp">${timestamp}</span></div>`
+        );
 
-        $.post("/get", { msg: userMessage })
-        .done(function(data) {
-            console.log("🔄 Response Data:", data);  
+        $(".typing").show(); // Show typing indicator
 
-            if (data && data.response) {
-                $("#chat-box").append("<div class='message bot-message'><p><b>Bot:</b> " + data.response + "</p><span class='time'>" + timeStamp + "</span></div>");
-            } else {
-                $("#chat-box").append("<div class='message bot-message'><p><b>Bot:</b> ⚠ No valid response.</p><span class='time'>" + timeStamp + "</span></div>");
+        $.ajax({
+            url: "/get",
+            type: "POST",
+            data: { msg: userMessage },
+            success: function (response) {
+                $(".typing").hide(); // Hide typing indicator
+
+                let botMessage = response.response || "Sorry, I couldn't find an answer.";
+                let timestamp = new Date().toLocaleTimeString();
+
+                $("#chat-box").append(
+                    `<div class='message bot'>
+                        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Doctor">
+                        ${botMessage} 
+                        <span class="timestamp">${timestamp}</span>
+                    </div>`
+                );
+
+                $("#chat-box").scrollTop($("#chat-box")[0].scrollHeight);
             }
-        })
-        .fail(function(xhr, status, error) {
-            console.log("❌ AJAX Error:", error);
-            $("#chat-box").append("<div class='message bot-message'><p><b>Bot:</b> ❌ Error retrieving response.</p><span class='time'>" + timeStamp + "</span></div>");
         });
 
-        $("#chat-box").scrollTop($("#chat-box")[0].scrollHeight); // Auto-scroll to the latest message
+        $("#user-input").val("");
     }
 });
